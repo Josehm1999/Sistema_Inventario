@@ -1,0 +1,7 @@
+{
+    "/api/*": {
+        "target": "http://sistemadeinventarios.azurewebsites.net",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}

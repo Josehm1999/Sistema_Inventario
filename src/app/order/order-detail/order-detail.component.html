@@ -1,0 +1,27 @@
+<div class="order-detail-container">
+  <div>
+    <button mat-raised-button color="primary" routerLink="/order">Ir atrás</button>
+  </div>
+  <div class="order-header">
+    
+        <div>
+            <label class="order-edit-label"> Fecha de Orden:</label>
+            <label class="">{{ orderItem.orderDate | date}}</label>
+        </div>
+        <div>
+            <label class="order-edit-label"> Nombre del cliente:</label>
+            <label class="l">{{ orderItem.customer}}</label>
+        </div>
+        <div>
+            <label class="order-edit-label"> Monto Total:</label>
+            <label class="">{{ orderItem.totalAmount}}</label>
+        </div>
+    
+  </div>
+  <div>
+
+  </div>
+  <div>
+    <app-table-view #tableView [items]="orderItem.orderDetails" [columns]="detailColumns"></app-table-view>
+  </div>
+</div>

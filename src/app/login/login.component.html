@@ -1,0 +1,36 @@
+<div class="login-container">
+  <mat-card class="login-card">
+    <mat-card-content>
+      
+        <form class="login-form" [formGroup]="loginForm" (ngSubmit)="login(loginForm)">
+          <div class="login-control-input">
+            <mat-icon>email</mat-icon>
+            <mat-form-field class="login-form-field">
+              <input matInput placeholder="E-mail" aria-label="Email" formControlName="email" />
+              <mat-error *ngIf="loginForm.get('email').hasError('required')">E-mail es obligatorio!</mat-error>
+              <mat-error *ngIf="loginForm.get('email').hasError('email')">El E-mail no es válido</mat-error>
+              <mat-error *ngIf="loginForm.get('email').hasError('cannotContainSpace')">No debe tener espacios en blanco!</mat-error>
+            </mat-form-field>
+          </div>
+          <div class="login-control-input">
+            <mat-icon>vpn_key</mat-icon>
+            <mat-form-field class="login-form-field">
+              <input  matInput aria-label="password" type="password"  placeholder="Contraseña" aria-label="password" formControlName="password">
+              <mat-error *ngIf="loginForm.get('password').hasError('required')">Contraseña invalida!</mat-error>
+              <mat-error *ngIf="loginForm.get('password').hasError('minlength')">La contraseña debe tener 2 carácteres como mínimo</mat-error>
+              <mat-error *ngIf="loginForm.get('password').hasError('maxlength')">Supero el número máximo de carácteres</mat-error>
+              <mat-error *ngIf="loginForm.get('password').hasError('cannotContainSpace')">No debe tener espacios en blanco!</mat-error>
+            </mat-form-field>
+          </div>
+          <br />
+          <div *ngIf="loginError">
+            <p class="login-error">{{loginError}}</p>
+          </div>
+          <div>
+            <button mat-flat-button type="submit" color="warn" [disabled]="loginForm.invalid">Login</button>
+          </div>
+        </form>
+      
+    </mat-card-content>
+  </mat-card>
+</div>

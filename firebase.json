@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "public": "dist/sistema-inventario",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}
