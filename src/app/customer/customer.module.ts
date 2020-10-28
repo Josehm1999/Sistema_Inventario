@@ -7,6 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { MaterialModule } from '../material.module';
+import { SharedModule } from '../shared/shared.module';
 
 
 
@@ -17,7 +18,8 @@ import { MaterialModule } from '../material.module';
     CommonModule,
     CustomerRoutingModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    SharedModule,
   ],
   entryComponents: [NewCustomerComponent, EditCustomerComponent, CustomerDetailsComponent]
 })
