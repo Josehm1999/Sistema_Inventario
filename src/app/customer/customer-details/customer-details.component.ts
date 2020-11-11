@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import {CustomerDetailsService} from './customer-details.service';
 import { AddOrEditCustomer } from '../models/AddOrEditCustomer';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -12,13 +12,14 @@ export interface DialogData{
   selector: 'app-customer-details',
   templateUrl: './customer-details.component.html',
   styleUrls: ['./customer-details.component.scss'],
-  providers: [CustomerDetailsService]
+  providers: [CustomerDetailsService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CustomerDetailsComponent implements OnInit {
 
   customer: AddOrEditCustomer = new AddOrEditCustomer();
   constructor(private service: CustomerDetailsService,
-    public dialogRef:MatDialogRef<EditCustomerComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData) { 
+    public dialogRef:MatDialogRef<EditCustomerComponent>, @Inject(MAT_DIALOG_DATA) public data: DialogData, private ref: ChangeDetectorRef) { 
       this.customerRecuperado(data.id);
      }
 
@@ -29,6 +30,7 @@ export class CustomerDetailsComponent implements OnInit {
     this.service.getCustomerById(id)
     .subscribe(response =>{
       this.customer = response;
+      this.ref.markForCheck();
       });
     };
   }

@@ -17,7 +17,7 @@ export class EditCustomerService {
   }
 
   editCustomer(data:AddOrEditCustomer): Observable<Response>{
-    return this.http.put(`${environment.urlServer}/Customer`,data)
+    return this.http.put(`${environment.urlServer}/Customer`, data)
     .pipe(
       map((response:any)=> response ));
   }

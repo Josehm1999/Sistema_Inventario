@@ -1,43 +1,39 @@
-import { Component, OnInit } from '@angular/core';
-import { CustomerService } from "./customer.service";
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Customer } from '../models/customer';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import { NewCustomerComponent } from '../new-customer/new-customer.component';
 import { EditCustomerComponent } from '../edit-customer/edit-customer.component';
 import { CustomerDetailsComponent } from '../customer-details/customer-details.component';
+import { Store } from '@ngrx/store';
+import { LoadData } from '../state/actions/customer-actions';
+import { Observable } from 'rxjs';
+import { getCustomerItems, getIsLoading, getNumberOfRecords } from '../state/reducers/index';
 
 @Component({
   selector: 'app-customer-list',
   templateUrl: './customer-list.component.html',
   styleUrls: ['./customer-list.component.scss'],
-  providers: [CustomerService]
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CustomerListComponent implements OnInit {
 
-  customers: Customer[]=[];
-  numberOfRecords = 0;
+  customers$: Observable<Customer[]> = this.store.select(getCustomerItems);
+  isLoading$: Observable<boolean> = this.store.select(getIsLoading); 
+  numberOfRecords$: Observable<number> = this.store.select(getNumberOfRecords);
   pageSizeOptions: Number[] = [9,21,42];
   pageSize = 10;
   pageIndex = 0;
-  isVisible=false; 
-  constructor(private customerService: CustomerService, public dialog: MatDialog) { 
-    this.getCustomer(1,this.pageSize);
-    
+  
+  constructor(public dialog: MatDialog, private store: Store<any>) { 
+    // this.getCustomer(1,this.pageSize);
   }
 
   ngOnInit(): void {
+    this.store.dispatch(new LoadData(1, this.pageSize));
   }
 
   getCustomer(page: number, rows: number): void{
-    this.isVisible=true;
-    this.customerService.getCustomerList(page,rows)
-      .subscribe(
-        response=>{
-          this.customers = response;
-          this.numberOfRecords = response[0].totalRecords;
-          this.isVisible=false;
-        } 
-      );
+    this.store.dispatch(new LoadData(page, rows));
   }
 
   changePage(event: any):void {

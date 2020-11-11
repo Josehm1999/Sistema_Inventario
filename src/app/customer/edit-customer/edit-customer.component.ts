@@ -1,9 +1,9 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { EditCustomerService } from "./edit-customer.service";
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AddOrEditCustomer } from '../models/AddOrEditCustomer';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { WhiteSpaceValidator } from 'src/app/shared/validators/whiteSpaceValidators';
+
 
 
 export interface DialogData{
@@ -12,8 +12,9 @@ export interface DialogData{
 @Component({
   selector: 'app-edit-customer',
   templateUrl: './edit-customer.component.html',
+  providers: [EditCustomerService],
   styleUrls: ['./edit-customer.component.scss'],
-  providers: [EditCustomerComponent]
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class EditCustomerComponent implements OnInit {
 
@@ -31,11 +32,11 @@ export class EditCustomerComponent implements OnInit {
 
   buildNewCustomerForm(): void{
     this.newCustomerForm = this.fb.group({
-      firstName: ['', [Validators.required, WhiteSpaceValidator.cannotContainSpace]],
-      lastName: ['', [Validators.required, WhiteSpaceValidator.cannotContainSpace]],
-      city: ['', [Validators.required, WhiteSpaceValidator.cannotContainSpace]],
-      country: ['', [Validators.required, WhiteSpaceValidator.cannotContainSpace]],
-      phone: ['', [Validators.required, WhiteSpaceValidator.cannotContainSpace]]
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      city: ['', [Validators.required]],
+      country: ['', [Validators.required]],
+      phone: ['', [Validators.required]]
     })
   }
 
@@ -61,7 +62,7 @@ export class EditCustomerComponent implements OnInit {
       .subscribe(response =>{
         this.dialogRef.close();
       });
-    }else if(!this.newCustomerForm.valid){
+    }else if(!this.newCustomerForm.dirty){
       this.newCustomerForm.reset();
     }
   }

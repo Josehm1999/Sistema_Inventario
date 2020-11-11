@@ -8,7 +8,6 @@
           <mat-form-field class="new-customer-form-field">
             <input type="text" matInput placeholder="Nombre" aria-label="First Name" formControlName="firstName" />
             <mat-error *ngIf="newCustomerForm.get('firstName').hasError('required')">Este campo es obligatorio!</mat-error>
-            <mat-error *ngIf="newCustomerForm.get('firstName').hasError('cannotContainSpace')">No debe tener espacios en blanco!</mat-error>
           </mat-form-field>
   
         </div>
@@ -17,7 +16,6 @@
           <mat-form-field class="new-customer-form-field">
             <input type="text" matInput placeholder="Apellidos" aria-label="Last Name" formControlName="lastName" />
             <mat-error *ngIf="newCustomerForm.get('lastName').hasError('required')">Este campo es obligatorio!</mat-error>
-            <mat-error *ngIf="newCustomerForm.get('lastName').hasError('cannotContainSpace')">No debe tener espacios en blanco!</mat-error>
           </mat-form-field>
         </div>
         <div class="element-form">
@@ -25,7 +23,6 @@
           <mat-form-field class="new-customer-form-field">
             <input type="text" matInput placeholder="Ciudad" aria-label="City" formControlName="city" />
             <mat-error *ngIf="newCustomerForm.get('city').hasError('required')">Este campo es obligatorio!</mat-error>
-            <mat-error *ngIf="newCustomerForm.get('city').hasError('cannotContainSpace')">No debe tener espacios en blanco!</mat-error>
           </mat-form-field>
         </div>
         <div class="element-form">
@@ -33,7 +30,6 @@
           <mat-form-field class="new-customer-form-field">
             <input type="text" matInput placeholder="País" aria-label="Country" formControlName="country" />
             <mat-error *ngIf="newCustomerForm.get('country').hasError('required')">Este campo es obligatorio!</mat-error>
-            <mat-error *ngIf="newCustomerForm.get('country').hasError('cannotContainSpace')">No debe tener espacios en blanco!</mat-error>
           </mat-form-field>
         </div>
         <div class="element-form">
@@ -41,7 +37,6 @@
           <mat-form-field class="new-customer-form-field">
             <input type="text" matInput placeholder="Teléfono" aria-label="Phone" formControlName="phone" />
             <mat-error *ngIf="newCustomerForm.get('phone').hasError('required')">Este campo es obligatorio!</mat-error>
-            <mat-error *ngIf="newCustomerForm.get('phone').hasError('cannotContainSpace')">No debe tener espacios en blanco!</mat-error>
           </mat-form-field>
         </div>
   

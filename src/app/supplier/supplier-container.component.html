@@ -1,4 +1,4 @@
-<app-spinner [isVisible]="isVisible"></app-spinner>
+<app-spinner [isVisible]="isVisible$ | async"></app-spinner>
 <div class="supplier-container">
     <div>
         <mat-form-field>
@@ -8,9 +8,9 @@
     <app-switch-view [templates]="templates" [defaultTemplateKey]="defaultTemplate">
     </app-switch-view>
     <ng-template #cardViewTemplate>
-        <app-supplier-list-card [items]="items"></app-supplier-list-card>
+        <app-supplier-list-card [items]="items$ | async"></app-supplier-list-card>
     </ng-template>
     <ng-template #tableViewTemplate>
-        <app-supplier-list-table [items]="items"></app-supplier-list-table>
+        <app-supplier-list-table [items]="items$ | async"></app-supplier-list-table>
     </ng-template>
 </div>

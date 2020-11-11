@@ -13,6 +13,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthHttpInterceptor } from './auth/AuthHttpInterceptor';
 import { LogoutComponent } from './logout/logout.component';
 import { MaterialModule } from './material.module';
+import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [AppComponent, LoginComponent, LogoutComponent],
@@ -20,6 +22,8 @@ import { MaterialModule } from './material.module';
     BrowserModule,
     BrowserAnimationsModule,
     SharedModule,
+    StoreModule.forRoot({},{}),
+    EffectsModule.forRoot([]),
     HttpClientModule,
     AppRoutingModule,
     FormsModule,

@@ -8,8 +8,11 @@ import { EditCustomerComponent } from './edit-customer/edit-customer.component';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
 import { MaterialModule } from '../material.module';
 import { SharedModule } from '../shared/shared.module';
-
-
+import { StoreModule } from '@ngrx/store';
+import { reducers } from "./state/reducers";
+import { EffectsModule } from '@ngrx/effects';
+import { CustomerEffects } from "./state/effects/customer-effects";
+import { CustomerService } from './customer-list/customer.service';
 
 
 @NgModule({
@@ -20,7 +23,10 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     MaterialModule,
     SharedModule,
+    StoreModule.forFeature("customer", reducers),
+    EffectsModule.forFeature([CustomerEffects])
   ],
+  providers: [CustomerService],
   entryComponents: [NewCustomerComponent, EditCustomerComponent, CustomerDetailsComponent]
 })
 export class CustomerModule { }
